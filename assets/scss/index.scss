@@ -1,0 +1,223 @@
+@import "variable";
+
+@import "theme_colors";
+
+@import "mixin";
+
+@import "fonts";
+
+@import "typography";
+
+@import "space";
+
+@import "responsive";
+
+/*===== Common Start =====*/
+
+:root {
+    --uc-primary-color: #{$primary_color};
+    --uc-secondary-color: #{$secondary_color};
+    --uc-white-light-color: #{$white_light_color};
+    --uc-white-light-color2: #{$white_light_color2};
+    --uc-white-color: #{$white_color};
+    --uc-black-color: #{$black_color};
+    --uc-primary-font-family: #{$primary_font};
+    --uc-secondary-font-family: #{$secondary_font};
+    --uc-noise-img: url("../../assets/images/body-bg.jpg");
+    --uc-box-shadow: 0 3px 6px #{rgba($black_color, 16%)};
+    --uc-text-shadow: 2px 2px 0 #{rgba($black_color, 30%)};
+    --uc-spacing: 100px;
+    --uc-spacing-y: 100px;
+    --uc-header-height: 100px;
+    --uc-spacing-x: clamp(80px, 5.209vw, 100px);
+    --uc-scrollbar-track-color: var(--uc-noise-img);
+    --uc-scrollbar-thumb-color: var(--uc-secondary-color);
+    --uc-scrollbar-thumb-hover-color: var(--uc-primary-color);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden !important;
+}
+
+body {
+    margin: 0;
+    font-family: var(--uc-primary-font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--uc-scrollbar-thumb-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--uc-scrollbar-thumb-hover-color);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--uc-scrollbar-track-color);
+}
+
+::-moz-selection {
+    background: rgba($secondary_color, 0.1);
+}
+
+::selection {
+    background: rgba($secondary_color, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    @include list_reset;
+}
+
+.back-image {
+    @include back_img();
+}
+
+a {
+    @include transition;
+    color: var(--uc-primary-color);
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+}
+
+p {
+    &:last-child,
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+.white-text {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    a:not(.sec-btn),
+    ul li {
+        color: var(--uc-white-color);
+    }
+}
+
+.sec-wp {
+    position: relative;
+    z-index: 4;
+}
+
+.sec-wp-index-5 {
+    position: relative;
+    z-index: 5;
+}
+
+.sec-btn {
+    @include d_flex($dis_flex: inline-flex);
+    @include transition($t_d: 0.35s, $t_t_f: ease-in-out);
+    background-color: var(--uc-primary-color);
+    color: var(--uc-white-color) !important;
+    border: none;
+    outline: none !important;
+    min-height: 60px;
+    border-radius: 0;
+    font-family: var(--uc-primary-font-family);
+    box-shadow: none;
+    padding: 18px 30px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 5;
+
+    &:before {
+        @include before_after($cont: "" attr(content) "", $t_b_val: 50%, $l_r_val: 50%, $h: auto, $z_ind: 2);
+        @include transition($t_d: 0.35s, $t_t_f: ease-in-out);
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        color: var(--uc-white-color);
+        text-align: center;
+        white-space: nowrap;
+        word-wrap: break-word;
+    }
+
+    &:after {
+        @include before_after($t_b: bottom, $z_ind: 1);
+        @include transition($t_d: 0.35s, $t_t_f: ease-in-out);
+        transform: scaleY(0);
+        transform-origin: center bottom;
+        backface-visibility: hidden;
+        background: var(--uc-secondary-color);
+    }
+
+    span {
+        @include transition($t_d: 0.35s, $t_t_f: ease-in-out);
+        display: block;
+        transform: translate(0);
+        position: relative;
+        z-index: 2;
+        opacity: 1;
+    }
+
+    &:hover {
+        span {
+            transform: translate(0, -20px);
+            opacity: 0;
+        }
+        &:before {
+            transform: translate(-50%, -50%);
+            opacity: 1;
+        }
+        &:after {
+            transform: scaleY(1);
+        }
+    }
+
+    &.yellow-btn:before {
+        color: var(--uc-secondary-color);
+    }
+
+    &.yellow-btn:after {
+        background: var(--uc-white-color);
+    }
+}
+
+.sec-title {
+    margin-bottom: 48px;
+}
+
+.sec-title-btn {
+    @include d_flex($justify: flex-end);
+    height: 100%;
+}
+
+.body-fixed {
+    overflow: hidden;
+}
+
+/*===== Common End =====*/
